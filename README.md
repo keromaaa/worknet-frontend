@@ -1,27 +1,21 @@
-# WorkNet
+#WorkNet API
+Worknet is a web application which allows users to access a comprehensive database of job listings, seamlessly connect with potential employers and manage their job search journey with ease. The app is currently a work in progress as we continue to implement additional functionalities, ranging from image integration to the introduction of entirely new features. Stay tuned for exciting updates!
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.0.
+##Features
+-User Registration: Users can sign up as job seekers or employers, tailoring their accounts to their specific needs.
 
-## Development server
+-Company Posting: Companies can create and publish job postings directly on the platform, streamlining the recruitment process.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+-Job Listings: Employees can access a vast database of job listings covering various industries, locations, and job types.
 
-## Code scaffolding
+-Advanced Search: Enable users to refine their job search based on specific criteria such as location, job title, company, and more.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+-Job Applications: Allow users to apply for jobs through the platform, streamlining the application process and enhancing user experience.
 
-## Build
+-Profile Customization: Users have the ability to customize their profiles, allowing them to showcase their skills, experience, and preferences to potential employers or network connections.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+##Technologies
+The backend was created with C# using ASP.NET, and the frontend was built using Angular with TypeScript.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+##Deployment
+WorkNet was a collaborative effort between Ahmed Elshiekh (https://github.com/RakimKai), who focused on the backend development, and myself, handling the frontend aspects of the project. For detailed information about the WorkNet API endpoints, parameters, and response formats visit the deployed API here: https://api.p2328.app.fit.ba/swagger/index.html, but for a intuitive and user-friendly UI experience visit the deployed Web App here: https://web.p2328.app.fit.ba/login 
