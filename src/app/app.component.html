@@ -1,0 +1,7 @@
+<div
+  *ngIf="this.auth.loader"
+  class="absolute w-screen h-screen flex justify-center items-center z-50"
+>
+  <app-loader></app-loader>
+</div>
+<router-outlet></router-outlet>

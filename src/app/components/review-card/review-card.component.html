@@ -1,0 +1,49 @@
+<div
+  class="relative border-2 border-stone-300 shadow-md rounded-[20px] flex flex-col gap-4 p-4 w-96"
+>
+  <div class="flex gap-3 items-center">
+    <div class="rounded-full bg-stone-300 w-16 h-16"></div>
+    <div class="h-full flex flex-col justify-center">
+      <p class="font-bold">
+        {{ companyName.length ? companyName : review.company.companyName }}
+      </p>
+      <div class="flex gap-3 items-center">
+        <app-star-rating
+          [rated]="true"
+          [rating]="review.rating"
+        ></app-star-rating>
+        <p class="font-semibold">{{ review.rating + ".0" }}</p>
+      </div>
+    </div>
+    <app-more-svg
+      *ngIf="menuIconVisible"
+      class="dropdown-icon ml-auto mb-auto"
+      (click)="menuVisible = !menuVisible"
+    ></app-more-svg>
+    <div
+      class="p-4 flex flex-col bg-white font-medium transition-all rounded-lg gap-2 w-fit absolute -right-[12px] top-12 shadow-md"
+      (clickOutside)="menuVisible = false"
+      [class.opacity-0]="!menuVisible"
+      [class.opacity-100]="menuVisible"
+      [delayClickOutsideInit]="true"
+      *ngIf="menuVisible"
+    >
+      <button
+        (click)="openEditDialog()"
+        class="hover:text-secondary transition-colors"
+      >
+        Edit
+      </button>
+      <button
+        (click)="openDeleteModal()"
+        class="text-red-500 hover:text-red-400 transition-colors"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+  <h3 class="font-bold">{{ review.title }}</h3>
+  <p>
+    {{ review.content }}
+  </p>
+</div>

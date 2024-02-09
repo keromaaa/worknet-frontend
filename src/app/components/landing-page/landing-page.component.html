@@ -1,0 +1,25 @@
+<app-page-layout [column]="true">
+  <section
+    class="flex flex-col gap-32 -mt-10 -mx-40 px-40 py-48 bg-gradient-to-r from-primary to-secondary text-white"
+  >
+    <h2 class="font-bold text-5xl text-center flex flex-col gap-2">
+      The number one platform for finding jobs.
+      <h3 class="font-semibold text-xl text-stone-200">
+        Unlock endless opportunities and shape your career path with our
+        innovative job search and placement services. Let us guide you towards
+        success and help you land the job of your dreams.
+      </h3>
+    </h2>
+    <!-- <input
+      class="bg-transparent border-b border-b-white outline-none placeholder:text-lg placeholder:font-medium"
+      type="text"
+      name="jobSearch"
+      id="jobSearch"
+      placeholder="Look for a job..."
+    /> -->
+  </section>
+  <section class="flex flex-col gap-6">
+    <h2 class="text-3xl font-bold mb-5">Featured jobs</h2>
+    <app-job-card *ngFor="let post of posts" [post]="post"></app-job-card>
+  </section>
+</app-page-layout>

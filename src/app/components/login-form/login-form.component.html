@@ -1,0 +1,61 @@
+<form
+  (ngSubmit)="onSubmit()"
+  class="px-6 md:px-[3.5rem] md:py-12 rounded-[20px] md:border-stone-300 md:border-2 flex flex-col gap-8 md:shadow-md w-full"
+>
+  <h3 class="font-semibold text-2xl">Login</h3>
+  <input
+    type="text"
+    name="email"
+    id="email"
+    placeholder="Email"
+    class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1 md:w-[22rem]"
+    [(ngModel)]="loginRequest.email"
+    [class.border-red-400]="loginError"
+  />
+  <div class="flex flex-col">
+    <input
+      type="password"
+      name="password"
+      id="password"
+      placeholder="Password"
+      class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1 md:w-[22rem]"
+      [(ngModel)]="loginRequest.password"
+      [class.border-red-400]="loginError"
+    />
+    <label
+      *ngIf="loginError"
+      for="password"
+      class="mt-2 text-red-400 w-full md:w-[22rem]"
+    >
+      {{ loginErrorMessage }}
+    </label>
+  </div>
+  <div class="flex gap-1 justify-start items-center">
+    <input
+      type="checkbox"
+      name="saveInfo"
+      id="saveInfo"
+      class="hover:cursor-pointer accent-primary"
+      [(ngModel)]="rememberMeValue"
+    />
+    <label for="saveInfo" class="text-base">Remember me</label>
+  </div>
+  <input
+    type="submit"
+    value="Log in"
+    class="rounded-[10px] bg-primary py-3 text-white hover:bg-secondary hover:cursor-pointer transition-colors"
+  />
+  <div class="flex items-center gap-2">
+    <div class="flex-1 border-primary border-b"></div>
+    <span class="text-primary">OR</span>
+    <div class="flex-1 border-primary border-b"></div>
+  </div>
+  <p>
+    Don't have an account?
+    <a
+      class="text-primary hover:text-secondary transition-colors"
+      routerLink="/register"
+      >Register here.</a
+    >
+  </p>
+</form>

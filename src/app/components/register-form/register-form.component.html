@@ -1,0 +1,145 @@
+<form
+  (ngSubmit)="onSubmit()"
+  class="px-6 md:px-[3.5rem] md:py-12 rounded-[20px] md:border-stone-300 md:border-2 flex flex-col gap-8 md:shadow-md w-full"
+  [formGroup]="registerForm"
+>
+  <h3 class="font-semibold text-2xl">Register</h3>
+  <div *ngIf="registerType" class="flex flex-col">
+    <div
+      id="name"
+      class="flex gap-8 md:gap-6 w-full md:w-[22rem] flex-col md:flex-row"
+    >
+      <input
+        formControlName="ime"
+        type="text"
+        name="firstName"
+        id="firstName"
+        placeholder="First name"
+        class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1 md:w-1/2 w-full"
+        [class.border-red-400]="displayFirstNameError() || displayNameError()"
+      />
+      <input
+        formControlName="prezime"
+        type="text"
+        name="lastName"
+        id="lastName"
+        placeholder="Last Name"
+        class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1 md:w-1/2 w-full"
+        [class.border-red-400]="displayLastNameError() || displayNameError()"
+      />
+    </div>
+    <label
+      *ngIf="
+        displayFirstNameError() || displayLastNameError() || displayNameError()
+      "
+      for="name"
+      class="mt-2 text-red-400 w-full md:w-[22rem]"
+    >
+      {{ nameErrorMessage }}
+    </label>
+  </div>
+  <div *ngIf="!registerType" class="flex flex-col">
+    <input
+      formControlName="imeKompanije"
+      type="text"
+      name="companyName"
+      id="companyName"
+      placeholder="Company name"
+      class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1 md:w-[22rem]"
+      [class.border-red-400]="displayCompanyNameError()"
+    />
+    <label
+      *ngIf="displayCompanyNameError()"
+      for="companyName"
+      class="mt-2 text-red-400 w-full md:w-[22rem]"
+      >{{ companyNameErrorMessage }}</label
+    >
+  </div>
+  <div class="flex flex-col">
+    <input
+      formControlName="email"
+      type="text"
+      name="email"
+      id="email"
+      placeholder="Email"
+      class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1 md:w-[22rem]"
+      [class.border-red-400]="displayEmailError()"
+    />
+    <label
+      *ngIf="displayEmailError()"
+      for="email"
+      class="mt-2 text-red-400 w-full md:w-[22rem]"
+      >{{ emailErrorMessage }}</label
+    >
+  </div>
+  <div class="flex flex-col">
+    <input
+      formControlName="password"
+      type="password"
+      name="password"
+      id="password"
+      placeholder="Password"
+      class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1 md:w-[22rem]"
+      [class.border-red-400]="displayPasswordError()"
+    />
+    <label
+      *ngIf="displayPasswordError()"
+      for="password"
+      class="mt-2 text-red-400 w-full md:w-[22rem]"
+      >{{ passwordErrorMessage }}</label
+    >
+  </div>
+  <div class="flex flex-col">
+    <input
+      formControlName="confirmPassword"
+      type="password"
+      name="confirmPassword"
+      id="confirmPassword"
+      placeholder="Confirm password"
+      class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1 md:w-[22rem]"
+      [class.border-red-400]="displayConfirmPwError()"
+    />
+    <label
+      *ngIf="displayConfirmPwError()"
+      for="confirmPassword"
+      class="mt-2 text-red-400 w-full md:w-[22rem]"
+      >{{ confirmPasswordErrorMessage }}</label
+    >
+  </div>
+  <input
+    type="submit"
+    value="Sign up"
+    class="rounded-[10px] bg-primary py-3 text-white hover:bg-secondary9 hover:cursor-pointer transition-colors"
+  />
+  <div class="flex items-center gap-2">
+    <div class="flex-1 border-primary border-b"></div>
+    <span class="text-primary dark:text-dark-secondary">OR</span>
+    <div class="flex-1 border-primary border-b"></div>
+  </div>
+  <div class="flex flex-col gap-4 w-full md:w-[22rem]">
+    <p *ngIf="registerType">
+      Want to register as a company?
+      <a
+        class="text-primary hover:text-secondary transition-colors cursor-pointer select-none"
+        (click)="changeRegisterType()"
+        >Click here.</a
+      >
+    </p>
+    <p *ngIf="!registerType">
+      Want to register as an employee?
+      <a
+        class="text-primary hover:text-secondary transition-colors cursor-pointer select-none"
+        (click)="changeRegisterType()"
+        >Click here.</a
+      >
+    </p>
+    <p>
+      Already have an account?
+      <a
+        class="text-primary hover:text-secondary transition-colors select-none"
+        routerLink="/login"
+        >Log in here.</a
+      >
+    </p>
+  </div>
+</form>

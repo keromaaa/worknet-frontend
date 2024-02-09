@@ -1,0 +1,66 @@
+<app-dialog-layout>
+  <form
+    class="flex flex-col gap-4 w-[32rem] max-h-[80vh]"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="editProfileForm"
+  >
+    <h2 class="font-bold text-3xl mb-4">Edit profile</h2>
+    <h3 class="font-semibold">About:</h3>
+    <textarea
+      class="border-2 border-neutral-300 rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors min-h-min"
+      id="about"
+      formControlName="about"
+    ></textarea>
+    <h3 class="font-semibold">Phone number:</h3>
+    <input
+      formControlName="phoneNumber"
+      type="text"
+      name="phoneNumber"
+      id="phoneNumber"
+      class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1"
+    />
+    <h3 *ngIf="isEmployee" class="font-semibold">Worked at:</h3>
+    <input
+      *ngIf="isEmployee"
+      formControlName="workedAt"
+      type="text"
+      name="workedAt"
+      id="workedAt"
+      class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1"
+    />
+    <h3 *ngIf="isEmployee" class="font-semibold">University:</h3>
+    <input
+      *ngIf="isEmployee"
+      formControlName="universty"
+      type="text"
+      name="university"
+      id="university"
+      class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1"
+    />
+    <h3 class="font-semibold">Place of residence:</h3>
+    <select
+      name="location"
+      id="location"
+      formControlName="location"
+      class="border-2 border-neutral-300 h-full rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors"
+    >
+      <option *ngFor="let location of locations" [ngValue]="location">
+        {{ location.city }}
+      </option>
+    </select>
+    <h3 *ngIf="!isEmployee" class="font-semibold">Company owner:</h3>
+    <input
+      *ngIf="!isEmployee"
+      formControlName="owner"
+      type="text"
+      name="owner"
+      id="owner"
+      class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1"
+    />
+    <input
+      type="submit"
+      value="Submit"
+      class="rounded-[10px] mt-4 bg-primary p-2 text-white hover:bg-secondary hover:cursor-pointer transition-colors"
+    />
+  </form>
+</app-dialog-layout>

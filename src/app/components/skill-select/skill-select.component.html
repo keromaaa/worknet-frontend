@@ -1,0 +1,65 @@
+<div
+  class="border-2 border-neutral-300 rounded-[20px] px-5 py-4 flex flex-wrap gap-4"
+>
+  <div
+    *ngFor="let skill of skills"
+    class="relative group border px-4 py-3 border-secondary text-primary font-medium hover:bg-secondary hover:text-white select-none transition-colors rounded-[10px]"
+  >
+    <button
+      *ngIf="isCurrentUser"
+      class="absolute flex justify-center items-center opacity-0 group-hover:opacity-100 hover:bg-red-400 hover:scale-110 transition-all -top-2 -right-2 rounded-full bg-red-500 text-white font-medium w-5 h-5 text-xs"
+      (click)="deleteSkill(skill)"
+    >
+      <svg
+        fill="#000000"
+        width="12px"
+        height="12px"
+        viewBox="-3.5 0 19 19"
+        xmlns="http://www.w3.org/2000/svg"
+        class="fill-white w-fit h-fit"
+      >
+        <path
+          d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"
+        />
+      </svg>
+    </button>
+    {{ skill }}
+  </div>
+  <form
+    *ngIf="addingSkill"
+    class="relative group border px-4 py-3 border-secondary text-primary w-fit font-medium select-none transition-colors rounded-[10px]"
+    (ngSubmit)="onSubmit()"
+  >
+    <input
+      type="text"
+      name="skill"
+      class="outline-none border-none bg-inherit w-min"
+      [(ngModel)]="newSkill"
+    />
+    <input type="submit" class="hidden" />
+    <button
+      class="absolute flex justify-center items-center opacity-0 group-hover:opacity-100 hover:bg-red-400 hover:scale-110 transition-all -top-2 -right-2 rounded-full bg-red-500 text-white font-medium w-5 h-5 text-xs"
+      (click)="closeInput()"
+    >
+      <svg
+        fill="#000000"
+        width="12px"
+        height="12px"
+        viewBox="-3.5 0 19 19"
+        xmlns="http://www.w3.org/2000/svg"
+        class="fill-white w-fit h-fit"
+      >
+        <path
+          d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"
+        />
+      </svg>
+    </button>
+  </form>
+  <div
+    *ngIf="isCurrentUser"
+    class="flex justify-center items-center py-3 px-5 text-white bg-primary hover:bg-secondary font-semibold text-xl select-none cursor-pointer transition-colors rounded-[10px]"
+    (click)="addingSkill = true"
+  >
+    +
+  </div>
+</div>

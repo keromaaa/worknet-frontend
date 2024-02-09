@@ -1,0 +1,51 @@
+<app-dialog-layout>
+  <form
+    [formGroup]="editPostForm"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col gap-4 w-[600px]"
+  >
+    <h2 class="text-3xl font-bold">Create a post</h2>
+    <h3 class="font-semibold">Job title:</h3>
+    <input
+      type="text"
+      class="border-2 border-neutral-300 rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors"
+      formControlName="title"
+    />
+    <h3 class="font-semibold">Job description:</h3>
+    <textarea
+      class="border-2 border-neutral-300 rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors min-h-min"
+      id="title"
+      formControlName="content"
+    ></textarea>
+    <div class="flex flex-col gap-4">
+      <div class="flex gap-2">
+        <div class="flex flex-col gap-4 flex-1">
+          <h3 class="font-semibold">Location:</h3>
+          <select
+            name="location"
+            id="location"
+            formControlName="location"
+            class="border-2 border-neutral-300 h-full rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors"
+          >
+            <option *ngFor="let location of locations" [ngValue]="location">
+              {{ location.city }}
+            </option>
+          </select>
+        </div>
+        <div class="flex flex-col gap-4 flex-1">
+          <h3 class="font-semibold">Application deadline:</h3>
+          <input
+            type="date"
+            class="border-2 border-neutral-300 rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors"
+            formControlName="date"
+          />
+        </div>
+      </div>
+    </div>
+    <input
+      type="submit"
+      value="Edit post"
+      class="mt-4 rounded-[10px] bg-primary p-2 text-white hover:bg-secondary hover:cursor-pointer transition-colors"
+    />
+  </form>
+</app-dialog-layout>

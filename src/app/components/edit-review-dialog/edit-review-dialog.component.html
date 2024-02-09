@@ -1,0 +1,35 @@
+<app-dialog-layout>
+  <h2 class="text-3xl font-semibold">Post a review</h2>
+  <h3 class="font-semibold">Rating:</h3>
+  <div class="flex gap-4 w-full">
+    <app-star-rating
+      [rating]="rating ?? 0"
+      [rated]="false"
+      (onSelect)="changeRating($event)"
+    ></app-star-rating>
+    <span class="font-semibold">{{ rating && rating + ".0" }}</span>
+  </div>
+  <form
+    [formGroup]="reviewForm"
+    (ngSubmit)="onSubmit()"
+    class="w-96 flex flex-col gap-4"
+  >
+    <h3 class="font-semibold">Title:</h3>
+    <input
+      type="text"
+      class="w-full border-2 border-neutral-300 rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors"
+      formControlName="title"
+    />
+    <h3 class="font-semibold">Content:</h3>
+    <textarea
+      class="w-full border-2 border-neutral-300 rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors min-h-min"
+      id="title"
+      formControlName="content"
+    ></textarea>
+    <input
+      type="submit"
+      value="Submit"
+      class="mt-4 rounded-[10px] bg-primary p-2 text-white hover:bg-secondary hover:cursor-pointer transition-colors"
+    />
+  </form>
+</app-dialog-layout>

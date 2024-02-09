@@ -1,0 +1,147 @@
+<app-page-layout *ngIf="profile" [column]="false" [centered]="false">
+  <aside
+    class="border-2 border-stone-300 rounded-[20px] p-9 shadow-md w-fit h-fit flex flex-col items-start gap-3 sticky"
+  >
+    <div class="flex flex-col gap-3 self-center">
+      <div class="w-56 h-56 rounded-[10px] bg-stone-300"></div>
+      <h2 class="text-center font-bold text-lg">
+        {{
+          isCompany
+            ? profile.companyName
+            : profile.firstName + " " + profile.lastName
+        }}
+      </h2>
+    </div>
+    <h3 class="font-semibold max-w-[14rem]">
+      Email: <br /><span class="font-normal">{{ profile.email }}</span>
+    </h3>
+    <h3 *ngIf="profile?.companyOwner" class="font-semibold max-w-[14rem]">
+      Company owner: <br /><span class="font-normal">{{
+        profile.companyOwner
+      }}</span>
+    </h3>
+    <h3 *ngIf="profile?.phoneNumber" class="font-semibold max-w-[14rem]">
+      Phone number: <br /><span class="font-normal">{{
+        profile.phoneNumber
+      }}</span>
+    </h3>
+    <h3
+      *ngIf="profile && profile?.location?.city !== ''"
+      class="font-semibold max-w-[14rem]"
+    >
+      City: <br /><span class="font-normal">{{ profile.location?.city }}</span>
+    </h3>
+    <h3 *ngIf="profile.university" class="font-semibold max-w-[14rem]">
+      Studied at: <br /><span class="font-normal">{{
+        profile.university
+      }}</span>
+    </h3>
+    <h3 *ngIf="profile?.workedAt" class="font-semibold max-w-[14rem]">
+      Worked at: <br /><span class="font-normal">{{ profile.workedAt }}</span>
+    </h3>
+    <button
+      *ngIf="isCurrentUser"
+      class="transition-all bg-primary hover:bg-secondary text-white w-full h-10 rounded-[10px]"
+      (click)="openEditModal()"
+    >
+      Edit profile
+    </button>
+    <button
+      *ngIf="
+        !isCurrentUser && isCompany && auth.getProfileType() === 'Employee'
+      "
+      class="transition-all bg-primary hover:bg-secondary text-white w-full h-10 rounded-[10px]"
+      (click)="openReviewModal()"
+    >
+      Post a review
+    </button>
+  </aside>
+  <section class="flex flex-col gap-4 w-[calc(100%-367px)]">
+    <section class="flex flex-col gap-4">
+      <h2 class="text-3xl font-bold">About</h2>
+      <p class="whitespace-break-spaces">
+        {{
+          profile.about
+            ? profile.about
+            : isCurrentUser
+            ? "Add something about yourself..."
+            : "Not provided."
+        }}
+      </p>
+      <span *ngIf="false" class="flex gap-2 group cursor-pointer w-fit">
+        <a
+          class="font-medium text-primary group-hover:text-secondary select-none transition-all"
+          >View CV</a
+        >
+        <svg
+          height="1rem"
+          width="1rem"
+          version="1.1"
+          id="_x32_"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 512 512"
+          xml:space="preserve"
+          class="self-center fill-primary group-hover:fill-secondary transition-colors"
+        >
+          <g>
+            <path
+              class="st0"
+              d="M96,0v416h416V0H96z M472,376H136V40h336V376z"
+            />
+            <polygon
+              class="st0"
+              points="40,472 40,296 40,136 40,96 0,96 0,512 416,512 416,472 376,472 	"
+            />
+            <polygon
+              class="st0"
+              points="232.812,312.829 350.671,194.969 350.671,279.766 390.671,279.766 390.671,126.688 237.594,126.688 
+       237.594,166.688 322.39,166.688 204.531,284.547 	"
+            />
+          </g>
+        </svg>
+      </span>
+    </section>
+    <section *ngIf="!isCompany" class="flex flex-col gap-4">
+      <h2 class="text-3xl font-bold">My skills</h2>
+      <app-skill-select
+        [skills]="profile.skills ?? []"
+        [isCurrentUser]="isCurrentUser"
+      ></app-skill-select>
+    </section>
+    <section *ngIf="isCompany" class="flex flex-col gap-4">
+      <h2 class="text-3xl font-bold">Created posts</h2>
+      <app-job-card
+        *ngFor="let post of profile.posts"
+        [post]="post"
+        [companyName]="profile.companyName"
+      ></app-job-card>
+      <p *ngIf="!profile.posts || profile.posts.length === 0">
+        There aren't any posts currently available.
+      </p>
+    </section>
+    <section class="flex flex-col gap-4">
+      <h2 class="text-3xl font-bold">Reviews</h2>
+      <div *ngIf="profile.reviews" class="flex gap-6 overflow-x-scroll pb-4">
+        <app-review-card
+          *ngFor="let review of profile.reviews"
+          [review]="review"
+          [companyName]="isCompany ? profile.companyName : ''"
+          [menuIconVisible]="review.reviewEmployeeId === this.currentUserId"
+          (afterChange)="ngOnInit()"
+        ></app-review-card>
+      </div>
+      <p *ngIf="!profile.reviews || profile.reviews.length === 0">
+        {{
+          isCompany
+            ? isCurrentUser
+              ? "Your company hasn't been reviewed yet."
+              : profile.companyName + " hasn't been reviewed yet."
+            : isCurrentUser
+            ? "You haven't posted any reviews yet."
+            : "This user hasn't posted any reviews yet."
+        }}
+      </p>
+    </section>
+  </section>
+</app-page-layout>

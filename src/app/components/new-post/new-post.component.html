@@ -1,0 +1,116 @@
+<app-page-layout [column]="false" [centered]="true">
+  <form
+    [formGroup]="newPostForm"
+    (ngSubmit)="onSubmit()"
+    class="flex flex-col gap-4 w-[600px]"
+  >
+    <h2 class="text-3xl font-bold">Create a post</h2>
+    <h3 class="font-semibold">Job title:</h3>
+    <input
+      type="text"
+      class="border-2 border-neutral-300 rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors"
+      [class.border-red-400]="displayTitleError()"
+      formControlName="title"
+    />
+    <p *ngIf="displayTitleError()" class="text-red-400">Title is required.</p>
+    <h3 class="font-semibold">Job description:</h3>
+    <textarea
+      class="border-2 border-neutral-300 rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors min-h-min"
+      [class.border-red-400]="displayDescriptionError()"
+      id="title"
+      formControlName="content"
+    ></textarea>
+    <p *ngIf="displayDescriptionError()" class="text-red-400">
+      Job description is required.
+    </p>
+    <div class="flex flex-col gap-4">
+      <div class="flex gap-2">
+        <div class="flex flex-col gap-4 flex-1">
+          <h3 class="font-semibold">Location:</h3>
+          <select
+            name="location"
+            id="location"
+            formControlName="location"
+            class="border-2 border-neutral-300 h-full rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors"
+            [class.border-red-400]="displayLocationError()"
+            (change)="onLocationSelect()"
+          >
+            <option *ngFor="let location of locations" [ngValue]="location">
+              {{ location.city }}
+            </option>
+          </select>
+        </div>
+        <div class="flex flex-col gap-4 flex-1">
+          <h3 class="font-semibold">Application deadline:</h3>
+          <input
+            type="date"
+            class="border-2 border-neutral-300 rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors"
+            formControlName="date"
+            [class.border-red-400]="displayDateError()"
+          />
+        </div>
+      </div>
+      <p *ngIf="displayLocationError()" class="text-red-400">
+        Location is required.
+      </p>
+      <p *ngIf="displayDateError()" class="text-red-400">
+        {{ deadlineError }}
+      </p>
+    </div>
+    <div class="flex flex-col gap-4">
+      <div class="flex gap-2">
+        <div class="flex flex-col gap-4 flex-1">
+          <h3 class="font-semibold">Industry:</h3>
+          <select
+            name="industry"
+            id="industry"
+            formControlName="industry"
+            class="border-2 border-neutral-300 h-full rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors"
+            [class.border-red-400]="displayIndustryError()"
+            (change)="onIndustrySelect()"
+          >
+            <option [ngValue]="null"></option>
+            <option *ngFor="let industry of industries" [ngValue]="industry">
+              {{ industry.name }}
+            </option>
+          </select>
+        </div>
+        <div class="flex flex-col gap-4 flex-1">
+          <h3 class="font-semibold">Employment type:</h3>
+          <select
+            name="employmentType"
+            id="employmentType"
+            formControlName="employmentType"
+            class="border-2 border-neutral-300 h-full rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors"
+            [class.border-red-400]="displayTypeError()"
+            (change)="onTypeSelect()"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              *ngFor="let employmentType of employmentTypes"
+              [ngValue]="employmentType"
+            >
+              {{ employmentType.title }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <p *ngIf="displayIndustryError()" class="text-red-400">
+        Industry is required.
+      </p>
+      <p *ngIf="displayTypeError()" class="text-red-400">
+        Employment type is required.
+      </p>
+    </div>
+    <h3 class="font-semibold">Application link:</h3>
+    <input
+      type="text"
+      class="border-2 border-neutral-300 rounded-[10px] p-2 bg-neutral-100 outline-none focus:border-primary transition-colors"
+    />
+    <input
+      type="submit"
+      value="Create post"
+      class="rounded-[10px] bg-primary p-2 text-white hover:bg-secondary hover:cursor-pointer transition-colors"
+    />
+  </form>
+</app-page-layout>

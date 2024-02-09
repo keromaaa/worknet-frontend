@@ -1,0 +1,98 @@
+<app-page-layout [column]="true" [centered]="false">
+  <ng-container *ngIf="post && isCurrentUser != null">
+    <section
+      class="flex items-center justify-between w-full h-56 border-2 border-stone-300 rounded-[20px] p-8"
+    >
+      <div class="flex h-full items-center gap-4">
+        <div class="h-40 w-40 bg-stone-300 rounded-[20px]"></div>
+        <div class="flex flex-col gap-4">
+          <h2 class="font-bold text-2xl">{{ post.title }}</h2>
+          <div
+            class="flex gap-2 group cursor-pointer"
+            [routerLink]="['/profile', post.companyId]"
+          >
+            <a
+              class="text-lg font-semibold text-secondary group-hover:text-primary transition-colors"
+              >{{ post.company.companyName }}</a
+            >
+            <svg
+              height="1rem"
+              width="1rem"
+              version="1.1"
+              id="_x32_"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              viewBox="0 0 512 512"
+              xml:space="preserve"
+              class="self-center fill-secondary group-hover:fill-primary transition-colors"
+            >
+              <g>
+                <path
+                  class="st0"
+                  d="M96,0v416h416V0H96z M472,376H136V40h336V376z"
+                />
+                <polygon
+                  class="st0"
+                  points="40,472 40,296 40,136 40,96 0,96 0,512 416,512 416,472 376,472 	"
+                />
+                <polygon
+                  class="st0"
+                  points="232.812,312.829 350.671,194.969 350.671,279.766 390.671,279.766 390.671,126.688 237.594,126.688 
+       237.594,166.688 322.39,166.688 204.531,284.547 	"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 flex1 grid-rows-2 gap-4 h-full">
+        <div class="flex flex-col">
+          <h4 class="font-semibold">Location:</h4>
+          <p>{{ post.location.city }}</p>
+        </div>
+        <div class="flex flex-col">
+          <h4 class="font-semibold">Industry:</h4>
+          <p>{{ post.industry.name }}</p>
+        </div>
+        <div class="flex flex-col">
+          <h4 class="font-semibold">Application deadline:</h4>
+          <p>{{ post.date | date }}</p>
+        </div>
+        <div class="flex flex-col">
+          <h4 class="font-semibold">Employment type:</h4>
+          <p>{{ post.employmentType.title }}</p>
+        </div>
+      </div>
+    </section>
+    <section class="flex flex-col gap-10">
+      <h3 class="font-bold text-3xl -mb-6">About the company</h3>
+      <p>
+        {{ post.company.about ?? "Not provided." }}
+      </p>
+      <h3 class="font-bold text-3xl -mb-6">About the job</h3>
+      <p>
+        {{ post.content }}
+      </p>
+      <button
+        *ngIf="isCurrentUser !== null && isCurrentUser === false"
+        class="self-end transition-all bg-primary hover:bg-secondary text-white w-56 h-10 rounded-[10px]"
+      >
+        Apply now
+      </button>
+      <div *ngIf="isCurrentUser" class="flex gap-4 self-end">
+        <button
+          class="transition-all bg-red-500 hover:bg-red-400 text-white w-56 h-10 rounded-[10px]"
+          (click)="openDeleteModal()"
+        >
+          Delete post
+        </button>
+        <button
+          class="transition-all bg-primary hover:bg-secondary text-white w-56 h-10 rounded-[10px]"
+          (click)="openEditModal()"
+        >
+          Edit post
+        </button>
+      </div>
+    </section>
+  </ng-container>
+</app-page-layout>

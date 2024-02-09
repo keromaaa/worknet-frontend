@@ -1,0 +1,117 @@
+<app-page-layout class="relative" [column]="false">
+  <aside
+    class="border-2 border-stone-200 rounded-[20px] p-9 shadow-md w-fit h-fit flex flex-col items-start justify-start gap-3 top-0 sticky"
+  >
+    <h3 class="font-bold text-2xl">Filters</h3>
+    <button
+      class="font-semibold text-primary hover:text-secondary cursor-pointer transition-colors select-none"
+      (click)="clearFilters()"
+    >
+      Clear filters
+    </button>
+    <div class="flex flex-col gap-2">
+      <h4 class="font-semibold max-w-[14rem]">Job title:</h4>
+      <input
+        [(ngModel)]="jobTitle"
+        (input)="onSearch()"
+        type="text"
+        class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1"
+      />
+    </div>
+    <div class="flex flex-col gap-2">
+      <h4 class="font-semibold max-w-[14rem]">Company name:</h4>
+      <input
+        [(ngModel)]="company"
+        (input)="onSearch()"
+        type="text"
+        class="outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-1"
+      />
+    </div>
+    <div class="flex flex-col gap-2 w-full">
+      <h4 class="font-semibold max-w-[14rem]">Industry:</h4>
+      <select
+        name="industry"
+        id="industry"
+        class="cursor-pointer outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-2 w-full h-fit"
+        (change)="onSearch()"
+        [(ngModel)]="industry"
+      >
+        <option ngValue=""></option>
+        <option
+          *ngFor="let industry of industries"
+          [ngValue]="industry.name"
+          class="bg-inherit rounded-[10px] text-inherit"
+        >
+          {{ industry.name }}
+        </option>
+      </select>
+    </div>
+    <div class="flex flex-col gap-2 w-full">
+      <h4 class="font-semibold max-w-[14rem]">Location:</h4>
+      <select
+        name="location"
+        id="location"
+        class="cursor-pointer outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-2 w-full h-fit"
+        (change)="onSearch()"
+        [(ngModel)]="location"
+      >
+        <option
+          *ngFor="let location of locations"
+          [ngValue]="location.city"
+          class="bg-inherit rounded-[10px] text-inherit"
+        >
+          {{ location.city }}
+        </option>
+      </select>
+    </div>
+    <div class="flex flex-col gap-2 w-full">
+      <h4 class="font-semibold max-w-[14rem]">Employment type:</h4>
+      <select
+        name="employmentType"
+        id="employmentType"
+        class="cursor-pointer outline-none bg-stone-100 rounded-[10px] border-2 border-stone-200 focus:border-primary transition-colors px-2 py-2 w-full h-fit"
+        (change)="onSearch()"
+        [(ngModel)]="employmentType"
+      >
+        <option value=""></option>
+        <option
+          *ngFor="let employmentType of employmentTypes"
+          [ngValue]="employmentType.title"
+          class="bg-inherit rounded-[10px] text-inherit"
+        >
+          {{ employmentType.title }}
+        </option>
+      </select>
+    </div>
+    <h3 class="font-bold text-2xl">Sort by</h3>
+    <div class="flex gap-1 justify-start items-center">
+      <input
+        type="checkbox"
+        name="popular"
+        id="popular"
+        class="hover:cursor-pointer accent-primary"
+        (change)="onSearch()"
+        [(ngModel)]="popular"
+      />
+      <label for="mySkills" class="text-base">Popular</label>
+    </div>
+  </aside>
+  <section *ngIf="loading" class="flex flex-col gap-4 w-full h-auto">
+    <h2 class="text-3xl font-bold">Job lookup</h2>
+    <app-loader class="self-center my-auto"></app-loader>
+  </section>
+  <section *ngIf="!loading" class="flex flex-col gap-4 w-full">
+    <h2 class="text-3xl font-bold">Job lookup</h2>
+    <p *ngIf="!jobs || !jobs.length">No jobs were found...</p>
+    <app-job-card *ngFor="let job of jobs" [post]="job"></app-job-card>
+    <div
+      class="mt-auto pt-4 w-full flex justify-center items-center gap-4 font-normal select-none"
+    >
+      <app-previous-page-svg
+        (click)="handlePreviousPageClick()"
+      ></app-previous-page-svg>
+      {{ page + " / " + pages }}
+      <app-next-page-svg (click)="handleNextPageClick()"></app-next-page-svg>
+    </div>
+  </section>
+</app-page-layout>

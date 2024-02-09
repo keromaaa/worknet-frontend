@@ -1,0 +1,17 @@
+@import "ngx-toastr/toastr";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+
+.custom-toast {
+  background-color: #54b0f2;
+  color: white;
+  font-weight: 500;
+  font-size: medium;
+  padding: 2rem;
+}

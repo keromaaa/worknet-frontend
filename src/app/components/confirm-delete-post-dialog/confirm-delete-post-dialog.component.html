@@ -1,0 +1,17 @@
+<app-dialog-layout>
+  <h3 class="font-semibold">Are you sure you want to delete the post?</h3>
+  <div class="flex gap-4 w-96">
+    <button
+      (click)="deletePost()"
+      class="transition-all bg-red-500 hover:bg-red-400 text-white flex-1 h-10 rounded-[10px]"
+    >
+      Yes
+    </button>
+    <button
+      (click)="closeDialog()"
+      class="transition-all bg-primary hover:bg-secondary text-white flex-1 h-10 rounded-[10px]"
+    >
+      No
+    </button>
+  </div>
+</app-dialog-layout>
