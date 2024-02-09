@@ -15,7 +15,7 @@ Worknet is a web application which allows users to access a comprehensive databa
 - Profile Customization: Users have the ability to customize their profiles, allowing them to showcase their skills, experience, and preferences to potential employers or network connections.
 
 ## Technologies
-The backend was created with C# using ASP.NET, and the frontend was built using Angular with TypeScript.
+The frontend was built using Angular with TypeScript, styled with Tailwind CSS.
 
 ## Deployment
 ### Frontend (Angular with TypeScript):
